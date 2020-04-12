@@ -7,5 +7,5 @@ if command -v gsed >/dev/null; then
 fi
 
 
-## Usage ex:
+## Usage:
 # ${SED} -i  -e "…"  "${file}"
