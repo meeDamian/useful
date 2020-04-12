@@ -17,9 +17,9 @@ Setup headless Raspberry Pi from scratch with nothing, but USB cable (and a way 
     sed -E -i.bak 's|(rootwait)|\1 modules-load=dwc2,g_ether|' cmdline.txt && rm -f cmdline.txt.bak 
     ```
 
-1. Create `ssh`, and `avahi` files
+1. Create `ssh` file with
     ```
-    touch ssh avahi
+    touch ssh
     ```
 
 1. [IMPORTANT] Connect Raspberry Pi to your computer using the microUSB port marked "USB" (**not** "PWR IN").
