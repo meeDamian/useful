@@ -6,7 +6,7 @@ log() {
   >&2 echo "$*"
 }
 log_err() {
-  log  "\n\t-> ERR: $*\n"
+  log "\n\t-> ERR: $*\n"
 }
 log_ok() {
   log "\t-> ${*:-ok}" # if nothing passed, write "ok"
@@ -15,12 +15,19 @@ log_ok() {
 
 ## Usage:
 log "Starting some step…"
-# Some command doing it's stuff…
+# …
 log_ok # default ok response
 log_ok "specific status update"
 
-log "Starting something that fails…"
-# fail occurs here
+log "Starting something that will fail…"
+# …
 log_err "that thing went wrong"
 
 
+## Output:
+#	Starting some step…
+#		-> ok
+#		-> specific status update
+#	Starting something that fails…
+#
+#		-> ERR: that thing went wrong
