@@ -1,18 +1,17 @@
 #!/usr/bin/env sh
 
-## Useful for scripts that perform a series of steps
-#
-#	NOTE: all logs are sent to `stderr`, to avoid interfering with output
-#	      (change to `stdout` by deleting `>&2` below)
+TAG=my-script
+
+# Useful for scripts that perform a series of steps
 
 log() {
-	>&2 echo "$*"
-}
-log_err() {
-	log "\n\t-> ERR: $*\n"
+  >&2 echo "$*" | logger --tag  "$TAG"
 }
 log_ok() {
-	log "\t-> ${*:-ok}" # if nothing passed, write "ok"
+  log "\t-> ${*:-ok}" # if nothing passed, write "ok"
+}
+log_err() {
+  log "\t-> ERR: $*"
 }
 
 
@@ -33,5 +32,5 @@ _usage() {
 #		-> ok
 #		-> specific status update
 #	Starting something that fails…
-#
 #		-> ERR: that thing went wrong
+
