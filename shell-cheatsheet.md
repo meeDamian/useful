@@ -1,53 +1,61 @@
 # Shell CheatSheet
 
-<table>
 
-<thead><tr>
-    <th><pre>cmd</pre></th>
-    <th>Description</th>
-</tr></thead>
+## Process JSON
 
-<tbody><tr>
+[`jq`](https://stedolan.github.io/jq/manual/) is best I know of.
 
-<td>
+<details><summary>How to install</summary><p>
 
-```shell
-${var#sth}
-${var##sth}
+```shell script
+brew install jq # MacOS
+apt install jq  # Debian family
+apk add jq      # Alpine
 ```
 
-</td><td>
+</p></details>
 
-Remove `"sth"` from the **beginning** of `$var`, Example:
+```shell script
+# Get raw `url`s from curl returning a list of objects
+curl ... | jq -r '.[].url'
 
-```shell
+# Print formatted file
+jq . < ./file.json
+
+# Create JSON object
+jq -n \
+  --arg     simple 'some-value' \
+  --argjson json   '["one", "two", 3]' \
+  '{$simple, $json}'
+```
+
+
+## Strip prefix- `#`, `##`
+
+Remove from beginning
+
+```shell script
 var="abc abc"
 
-echo "${var#*b}"  # -> "c abc"
-echo "${var##*b}" # -> "c"
+echo "${var#*b}" # non-greedy
+# -> "c abc"
+
+echo "${var##*b}" # greedy
+# -> "c"
 ```
 
-</td>
-</tr><tr>
-<td>
- 
-```shell
-${var%sth}
-${var%%sth}
-```
- 
-</td><td>
- 
-Remove `"sth"` from the **end** of `$var`, Example:
- 
-```shell
+
+## Strip -suffix `%`, `%%`
+
+Remove from end
+
+```shell script
 var="abc abc"
 
-echo "${var%b*}"  # -> "abc a"
-echo "${var%%b*}" # -> "a"
-```
- 
-</td>
-</tr></tbody>
+echo "${var%b*}" # non-greedy
+# -> "abc a"
 
-</table>
+echo "${var%%b*}" # greedy
+# -> "a"
+```
+
