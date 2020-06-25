@@ -2,11 +2,8 @@
 
 # If `gsed` is available in the system, then use it instead as the available `sed` might not be too able (MacOS)…
 
-SED="sed"
-if [ -x "$(command -v gsed)" ]; then
-  SED=gsed
-fi
-
+# shellcheck disable=SC2086,SC2048
+[ -x "$(command -v gsed)" ] && sed() { gsed $*; }
 
 ## Usage:
-# ${SED} -i  -e "…"  "${file}"
+# sed  -i  -e "…"  "$file"
