@@ -41,7 +41,7 @@ EOF
 _usage() {
 	case "${1#--}" in
 	'')         show_help;    exit 1 ;;
-	-h|help)    show_help;    exit 0 ;;
+	-h|h[ea]lp) show_help;    exit 0 ;; # help and halp :)
 	-v|version) show_version; exit 0 ;;
 	esac
 }
